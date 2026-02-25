@@ -9,7 +9,7 @@ using namespace cadmium;
 struct CentrosomePair : public Coupled {
 
     Port<string> phase_in;
-    Port<string> phase_out;
+    Port<string> status_out;
 
     CentrosomePair(const std::string& id) : Coupled(id) {
         phase_in = addInPort<string>("phase_in");
