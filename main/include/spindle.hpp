@@ -1,108 +1,95 @@
 #ifndef CENTROSOME_HPP
 #define CENTROSOME_HPP
 
-#include <cadmium/modeling/devs/port.hpp>
-
-#include <limits>
+#include <cadmium/modeling/devs/atomic.hpp>
+#include <iostream>
 #include <string>
 
 using namespace cadmium;
 using namespace std;
 
-struct Spindle {
+struct SpindleState {
+    string state;
+    bool active;
+};
 
-    //Ports
-    struct phase_in : public in_port<string> {};
-    struct status_out : public out_port<string> {};
+inline ostream& operator<<(ostream& os, const SpindleState& s) {
+    os << s.state;
+    return os;
+}
 
-    using input_ports = tuple<phase_in>;
-    using output_ports = tuple<status_out>;
+class Centrosome : public Atomic<SpindleState> {
+public:
+    
+    Port<std::string> phase_in;
+    Port<std::string> status_out;
+    
 
-    //State 
-    struct state_type {
-        string state;
-        bool active;
-    };
-
-    state_type state;
-
-    Spindle() {
-        state.state = "inactive"; 
-        state.active = false
+    Spindle(const std::string& id) : Atomic<SpindleState>(id, {"stable", false}) {
+        phase_in = addInPort<std::string>("phase_in");
+        status_out = addOutPort<std::string>("status_out");
     }
 
+
     // Internal Transition
-    void internal_transition() {
+     void internalTransition(SpindleState& state) const override {
         state.active = false;
     }
 
     // External Transition
-    void external_transition(TIME e,
-        typename make_message_bags<input_ports>::type mbs) {
-
-        for (const auto &x : get_messages<Nucleolus_defs::phase_in>(mbs)) {
-            
-            if (x == "Prophase") {
+    void externalTransition(SpindleState& state, double e) const override {
+        for (const auto &msg : phase_in->getBag()) {       
+            if (msg == "Prophase") {
                 state.state = "forming";
                 state.active = true;  
             }
-            else if (x == "Metaphase") {
+            else if (msg == "Metaphase") {
                 state.state = "attached";
                 state.active = true;
             }
-            else if (x == "Anaphase") {
+            else if (msg == "Anaphase") {
                 state.state = "pulling";
                 state.active = true;
             }
-            else if (x == "Telophase") {
+            else if (msg == "Telophase") {
                 state.state = "disassembling";
                 state.active = true; 
             }
-            else if (x == "Cytokinesis") {
+            else if (msg == "Cytokinesis") {
                 state.state = "inactive";
                 state.active = true;
             }
         }
     }
 
-     // Output
-    typename make_message_bags<output_ports>::type output() const {
-
-        typename make_message_bags<output_ports>::type bags;
-
-        std::vector<std::string> bag_port_out;
-
+    // Output
+    void output(const SpindleState& state) const override {
         if (state.state == "inactive") {
-            bag_port_out.push_back("ready");
+            status_out->addMessage("ready");
         } else {
-            bag_port_out.push_back("not_ready");
+            status_out->addMessage("not_ready");
         }
-
-        get_messages<typename Centrosome_defs::status_out>(bags) = bag_port_out;
-
-        return bags;
     }
 
 
     // Time advance
-    TIME time_advance() const {
+    double timeAdvance(const SpindleState& state) const override {
         if (state.active){
             if (state.state == "forming")
-                return TIME("00:00:02:000");  // t1
+                return 2.0;  // t1
 
             if (state.state == "attached")
-                return TIME("00:00:03:000");  // t2
+                return 3.0;  // t2
             
             if (state.state == "pulling")
-                return TIME("00:00:03:000");  // t3
+                return 3.0;  // t3
             
             if (state.state == "disassembling")
-                return TIME("00:00:03:000");  // t4
+                return 3.0;  // t4
 
             if (state.state == "inactive")
-                return TIME("00:00:03:000");  // t5
+                return 3.0;  // t5
         }
-        return numeric_limits<TIME>::infinity();
-
+        return std::numeric_limits<double>::infinity();
     }
 }

@@ -1,94 +1,82 @@
 #ifndef CENTROSOME_HPP
 #define CENTROSOME_HPP
 
-#include <cadmium/modeling/devs/port.hpp>
 
-#include <limits>
+#include <cadmium/modeling/devs/atomic.hpp>
+#include <iostream>
 #include <string>
 
 using namespace cadmium;
 using namespace std;
 
-struct Nucleolus {
+struct NucleolusState {
+    string state;
+    bool active;
+};
 
-    //Ports
-    struct phase_in : public in_port<string> {};
-    struct status_out : public out_port<string> {};
+inline ostream& operator<<(ostream& os, const NucleolusState& s) {
+    os << s.state;
+    return os;
+}
 
-    using input_ports = tuple<phase_in>;
-    using output_ports = tuple<status_out>;
+class Nucleolus : public Atomic<NucleolusState> {
+public:
+    
+    Port<std::string> phase_in;
+    Port<std::string> status_out;
 
-    //State 
-    struct state_type {
-        string state;
-        bool active;
-    };
 
-    state_type state;
-
-    Nucleolus() {
-        state.state = "visble"; 
-        state.active = false
+    Nucleolus(const std::string& id) : Atomic<NucleolusState>(id, {"stable", false}) {
+        phase_in = addInPort<std::string>("phase_in");
+        status_out = addOutPort<std::string>("status_out");
     }
 
+
     // Internal Transition
-    void internal_transition() {
+    void internalTransition(NucleolusState& state) const override {
         state.active = false;
     }
 
     // External Transition
-    void external_transition(TIME e,
-        typename make_message_bags<input_ports>::type mbs) {
-
-        for (const auto &x : get_messages<Nucleolus_defs::phase_in>(mbs)) {
-
-            if (x == "Interphase") {
+    void externalTransition(NucleolusState& state, double e) const override {
+        for (const auto &msg : phase_in->getBag()) {
+            if (msg == "Interphase" || msg == "Cytokinesis") {
                 state.state = "visible";
                 state.active = false;
             }
-            else if (x == "Prophase") {
+            else if (msg == "Prophase") {
                 state.state = "disappeared";
                 state.active = true;   // transition process
             }
-            else if (x == "Telophase") {
+            else if (msg == "Telophase") {
                 state.state = "reappearing";
                 state.active = true;   // transition process
             }
-            else if (x == "Cytokinesis") {
-                state.state = "visible";
-                state.active = false;
-            }
         }
     }
 
-     // Output
-    typename make_message_bags<output_ports>::type output() const {
-
-        typename make_message_bags<output_ports>::type bags;
-
-        std::vector<std::string> bag_port_out;
-
+    // Output
+    void output(const NucleolusState& state) const override {
         if (state.state == "visible") {
-            bag_port_out.push_back("ready");
+            status_out->addMessage("ready");
         } else {
-            bag_port_out.push_back("not_ready");
+            status_out->addMessage("not_ready");
         }
-
-        get_messages<typename Centrosome_defs::status_out>(bags) = bag_port_out;
-
-        return bags;
     }
 
 
-    TIME time_advance() const {
+    // Time Advance
+    double timeAdvance(const NucleolusState& state) const override {
         if (state.active){
             if (state.state == "disappeared")
-                return TIME("00:00:02:000");  // t1
+                return 2.0;  // t1
 
             if (state.state == "reappearing")
-                return TIME("00:00:03:000");  // t2
-        }
-        return numeric_limits<TIME>::infinity();
+                return 3.0;  // t2
 
+            // if (state.state == "visible")
+            //     return 0.0; // Trigger output immediately
+        }
+        return std::numeric_limits<double>::infinity();
     }
 }

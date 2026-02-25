@@ -50,7 +50,7 @@ public:
             }
             else if (msg == "Anaphase" || msg == "Telophase") { 
                 state.state = "at_poles"; 
-                state.active = false; 
+                state.active = true; 
             }
         }
     }
@@ -69,6 +69,7 @@ public:
         if (state.active) {
             if (state.state == "duplicated") return 2.0; 
             if (state.state == "migrating")  return 3.0;
+            if (state.state == "at_poles")   return 0.0; // Trigger output immediately
         }
         return std::numeric_limits<double>::infinity();
     }

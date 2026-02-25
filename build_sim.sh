@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define the path to Cadmium found on devssim
+# Cadmium path on devssim
 CADMIUM_PATH="/home/cadmium/rt_cadmium/include"
 
 # Compile
