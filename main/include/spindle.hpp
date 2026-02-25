@@ -25,7 +25,7 @@ public:
     Port<std::string> status_out;
     
 
-    Spindle(const std::string& id) : Atomic<SpindleState>(id, {"stable", false}) {
+    Spindle(const std::string& id) : Atomic<SpindleState>(id, {"inactive", false}) {
         phase_in = addInPort<std::string>("phase_in");
         status_out = addOutPort<std::string>("status_out");
     }

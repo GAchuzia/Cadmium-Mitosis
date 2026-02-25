@@ -27,7 +27,7 @@ public:
     Port<std::string> status_out;
 
 
-    Nucleolus(const std::string& id) : Atomic<NucleolusState>(id, {"stable", false}) {
+    Nucleolus(const std::string& id) : Atomic<NucleolusState>(id, {"visible", false}) {
         phase_in = addInPort<std::string>("phase_in");
         status_out = addOutPort<std::string>("status_out");
     }
