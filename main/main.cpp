@@ -12,9 +12,9 @@ int main() {
 
     rootCoordinator.setLogger<STDOUTLogger>(";");
 
-    // Run the simulation for 50 time units
+    // Run the simulation (all atomic tests in parallel; events up to ~23s)
     rootCoordinator.start();
-    rootCoordinator.simulate(50.0);
+    rootCoordinator.simulate(100.0);
     rootCoordinator.stop();
 
     return 0;
