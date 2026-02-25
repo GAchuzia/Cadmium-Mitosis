@@ -10,6 +10,8 @@
 
 // Atomic atomic models
 #include "../main/include/centrosome.hpp"
+#include "../main/include/chromosome.hpp"
+#include "../main/include/nuclear_envelope.hpp"
 #include "../main/include/nucleolus.hpp"
 #include "../main/include/spindle.hpp" 
 
