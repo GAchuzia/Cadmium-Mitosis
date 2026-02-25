@@ -37,20 +37,19 @@ public:
 
     void externalTransition(ChromosomeState& state, double e) const override {
         for (const auto& msg : phase_in->getBag()) {
-            if (msg == "Prophase") {
+            if (msg == "Prophase" && state.state == "uncondensed") {
                 state.state = "condensed";
                 state.active = true;
-            } else if (msg == "Metaphase") {
+            } else if (msg == "Metaphase" && state.state == "condensed") {
                 state.state = "aligned";
                 state.active = true;
-            } else if (msg == "Anaphase") {
+            } else if (msg == "Anaphase" && state.state == "aligned") {
                 state.state = "separating";
                 state.active = true;
-            } else if (msg == "Telophase") {
+            } else if (msg == "Telophase" && state.state == "separating") {
                 state.state = "decondensing";
                 state.active = true;
             }
-            // Interphase, Cytokinesis, or invalid phase jump: no state change (e.g. TC-C3)
         }
     }
 
