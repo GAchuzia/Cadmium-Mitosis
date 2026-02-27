@@ -30,7 +30,6 @@ public:
         status_out = addOutPort<std::string>("status_out");
     }
 
-
     // Internal Transition
      void internalTransition(SpindleState& state) const override {
         state.active = false;
@@ -70,7 +69,6 @@ public:
             status_out->addMessage("not_ready");
         }
     }
-
 
     // Time advance
     double timeAdvance(const SpindleState& state) const override {
