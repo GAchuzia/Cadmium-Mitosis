@@ -88,5 +88,3 @@ After `make run_tests`:
 ```bash
 ./run_tests
 ```
-
-
