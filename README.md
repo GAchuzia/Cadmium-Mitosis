@@ -89,4 +89,4 @@ After `make run_tests`:
 ./run_tests
 ```
 
-Runs Centrosome, Nucleolus, Chromosome (multiple cases), and Nuclear Envelope (two cases). Each uses a file from `input_data/atomic_models/`. Output is CSV to stdout.
+
