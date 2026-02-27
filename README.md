@@ -1,12 +1,12 @@
 # Cadmium Mitosis Model
 
-This folder contains the MITOSIS DEVS model implemented in Cadmium.
+The Mitosis DEVS model implemented in Cadmium.
 
 ---
 
-## Files organization
+## Files Organization
 
-**Root**
+Root
 
 - `README.md`
 - `makefile`
@@ -29,16 +29,16 @@ Entry point and atomic/coupled model headers
 **top_model/**  
 Top coupled model
 
-- `top.hpp`: Currently runs one Centrosome fed by `input_data/TC_Centrosome_Pair1.txt`
+- `top.hpp`: Defines `top_model`, which wires the `mitosis_system` coupled model and reads a start trigger sequence from `input_data/start.txt`.
 
 **input_data/**  
 Input data for the model and tests
 
-- `TC_Centrosome_Pair1.txt`: Used by the top model
+- `start.txt`: Start trigger sequence consumed by `top_model`
 - `atomic_models/`: Used by `run_tests`: `TC_Chromosome1.txt`, `TC_Chromosome2.txt`, `TC_Nuclear_Envelope1.txt`, `TC_Nuclear_Envelope2.txt`, `TC_Centrosome1.txt`, `TC_Nucleolus1.txt`, etc.
 
 **simulation_results/**  
-Created when you run `./simulation`. One CSV file per component (e.g. `centrosome.txt`, `input_reader.txt`).
+Created when you run `./simulation`. One text file per DEVS model (e.g. `mitosis_system.txt`, `phaseControl.txt`, `cellStructures.txt`). Each file is CSV with header `time;model_id;model_name;port_name;data`.
 
 **tests/**  
 Unit tests for atomic models
@@ -78,7 +78,7 @@ This creates `simulation`. For tests: `make run_tests` creates `run_tests`.
 ./simulation
 ```
 
-Reads phase input from `input_data/TC_Centrosome_Pair1.txt` (see `top_model/top.hpp`). Writes CSV to stdout and to `simulation_results/` (one file per component).
+Reads the start trigger sequence from `input_data/start.txt` (see `top_model/top.hpp`). Runs the full mitosis system and writes CSV logs to stdout and to `simulation_results/` (one file per model).
 
 ### 4. Run atomic tests
 
@@ -88,5 +88,4 @@ After `make run_tests`:
 ./run_tests
 ```
 
-Runs Centrosome, Nucleolus, Chromosome (two cases), and Nuclear Envelope (two cases). Each uses a file from `input_data/atomic_models/`. Output is CSV to stdout.
-
+Runs Centrosome, Nucleolus, Chromosome (multiple cases), and Nuclear Envelope (two cases). Each uses a file from `input_data/atomic_models/`. Output is CSV to stdout.
