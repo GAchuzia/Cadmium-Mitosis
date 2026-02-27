@@ -1,13 +1,13 @@
 # Cadmium Mitosis — Makefile
 # CADMIUM_PATH: path containing the Cadmium headers (default: /home/cadmium/rt_cadmium/include)
-# Targets: simulation (default), run_tests, clean
+# Targets: all (simulation + run_tests), simulation, run_tests, clean
 CADMIUM_PATH ?= /home/cadmium/rt_cadmium/include
 CXX         = g++
 CXXFLAGS    = -g -O3 -std=c++17 -I $(CADMIUM_PATH)
 
 .PHONY: all clean simulation run_tests
 
-all: simulation
+all: simulation run_tests
 
 simulation: main/main.cpp top_model/top.hpp main/include/*.hpp
 	$(CXX) $(CXXFLAGS) main/main.cpp -o simulation

@@ -40,8 +40,7 @@ Input data for the model and tests
 **simulation_results/**  
 Created when you run `./simulation`. Contains:
 - `simulation_output.txt`: Full simulation log (same as stdout).
-
-
+- One file per DEVS model (e.g. `mitosis_system.txt`, `phaseControl.txt`, `cellStructures.txt`). Each is CSV with header `time;model_id;model_name;port_name;data`.
 **tests/**  
 Unit tests for atomic models
 
@@ -72,7 +71,7 @@ make clean; make all
 
 Or: `./build_sim.sh`
 
-This creates `simulation`. For tests: `make run_tests` creates `run_tests`.
+This creates both `simulation` and `run_tests`. To build only one: `make simulation` or `make run_tests`.
 
 ### 3. Run the top model
 
