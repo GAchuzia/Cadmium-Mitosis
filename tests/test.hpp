@@ -25,15 +25,28 @@
 
 using namespace cadmium;
 
-// Writes to both file and stdout
+// Strips ANSI escape sequences (e.g. ^[[33m) and writes to both file and stdout
 struct TeeBuf : std::streambuf {
     std::streambuf* a;
     std::streambuf* b;
+    int state = 0;  // 0=normal, 1=after ESC, 2=in CSI
     TeeBuf(std::streambuf* a_, std::streambuf* b_) : a(a_), b(b_) {}
+    void put(char c) {
+        a->sputc(c);
+        b->sputc(c);
+    }
     int overflow(int c) override {
         if (c == EOF) return !EOF;
-        a->sputc(static_cast<char>(c));
-        b->sputc(static_cast<char>(c));
+        char ch = static_cast<char>(c);
+        if (state == 0) {
+            if (c == '\033') state = 1;
+            else put(ch);
+        } else if (state == 1) {
+            if (c == '[') state = 2;
+            else { put('\033'); put(ch); state = 0; }
+        } else {
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) state = 0;
+        }
         return c;
     }
     int sync() override {
