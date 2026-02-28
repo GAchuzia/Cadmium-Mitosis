@@ -4,14 +4,14 @@ This folder contains the **Mitosis** DEVS model implemented in Cadmium.
 
 ---
 
-# FILES ORGANIZATION
+## FILES ORGANIZATION
 
 **Makefile**  
 Build and run targets: `make all` (build both executables), `make simulation`, `make tests`, `make clean`.
 
 ---
 
-**main/**  
+### **main/**  
 *Entry point and source for the full mitosis simulation.*
 
 - main.cpp
@@ -30,7 +30,7 @@ Build and run targets: `make all` (build both executables), `make simulation`, `
 
 ---
 
-**top_model/**  
+### **top_model/**  
 *Top coupled model: wires the mitosis system and reads the start trigger from `input_data/coupled_models/start.txt`.*
 
 - top.hpp
@@ -39,18 +39,18 @@ Build and run targets: `make all` (build both executables), `make simulation`, `
 
 ---
 
-**tests/**  
+### **tests/**  
 *Unit tests for atomic and coupled models.*
 
 - main.cpp
 - test.hpp
 
-**tests/results/**  
+### **tests/results/**  
 *Output files contianing the results of each atomic and coupled model test(s).*
 
 ---
 
-**input_data/**  
+### **input_data/**  
 *Input data to run the model and the tests.*
 
 - atomic_models/
@@ -71,12 +71,12 @@ Build and run targets: `make all` (build both executables), `make simulation`, `
 
 ---
 
-**simulation_results/**  
+### **simulation_results/**  
 *Created automatically the first time you run the simulation. It stores the outputs from your simulations and tests.*
 
 ---
 
-**atomics/**  
+### **atomics/**  
 *DEVS / JSON specs for the atomic models.*
 
 - CentrosomeModel.json
@@ -89,20 +89,20 @@ Build and run targets: `make all` (build both executables), `make simulation`, `
 
 ---
 
-**docs/**  
+### **docs/**  
 *Assignment and model form documentation.*
 
-**.github/workflows/**  
+### **.github/workflows/**  
 *CI configuration (e.g. release.yml).*
 
 ---
 
-# STEPS
+## STEPS
 
-**0 – Model documentation**  
+### **0 – Model documentation**  
 The **docs/** folder contains the explanation of this model (e.g. assignment and model form docs).
 
-**1 – Update include path**  
+### **1 – Update include path**  
 Update the Cadmium include path in the Makefile (and in build_sim.sh if you use it).
 
 - In the **Makefile**, set or override:
@@ -112,7 +112,7 @@ Update the Cadmium include path in the Makefile (and in build_sim.sh if you use 
   - `CADMIUM_PATH="/home/cadmium/rt_cadmium/include"`
   - Use the path to your `cadmium/include` (or the folder that contains the Cadmium headers).
 
-**2 – Compile and run**  
+### **2 – Compile and run**  
 Open a terminal in the project root (Cadmium-Mitosis folder).
 
 - To **build both** the simulation and test executables (no run):  
@@ -127,7 +127,7 @@ Open a terminal in the project root (Cadmium-Mitosis folder).
 - To **remove** the built executables:  
   `make clean`
 
-**3 – Run the tests**  
+### **3 – Run the tests**  
 From the project root you can run the tests with:
 
 ```bash
