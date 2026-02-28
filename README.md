@@ -6,16 +6,18 @@ This folder contains the **Mitosis** DEVS model implemented in Cadmium.
 
 # FILES ORGANIZATION
 
-
 **Makefile**  
-Build and run targets: `make simulation`, `make tests`, `make clean`.
+Build and run targets: `make all` (build both executables), `make simulation`, `make tests`, `make clean`.
 
 **build_sim.sh**  
 Alternate script to compile the simulation only.
 
+**build/**  
+*Created automatically when you compile. Contains the executables `simulation` and `run_tests`.*
+
 ---
 
-**main/**   
+**main/**
 *Entry point and source for the full mitosis simulation.*
 
 - main.cpp
@@ -34,7 +36,7 @@ Alternate script to compile the simulation only.
 
 ---
 
-**top_model/**   
+**top_model/**
 *Top coupled model: wires the mitosis system and reads the start trigger from `input_data/coupled_models/start.txt`.*
 
 - top.hpp
@@ -116,30 +118,44 @@ Update the Cadmium include path in the Makefile (and in build_sim.sh if you use 
 **2 – Compile and run**  
 Open a terminal (e.g. Ubuntu terminal on Linux, Cygwin on Windows) in the project root (Cadmium-Mitosis folder).
 
-- To **compile and run the simulation**:  
+- To **build both** the simulation and test executables (no run):  
+  `make all`  
+  Executables are created in the **build/** folder: `build/simulation` and `build/run_tests`.
+- To **build and run the simulation**:  
   `make simulation`  
-  This builds the `simulation` executable and runs it. The executable is created in the project root.
-- To **compile and run the tests**:  
+  Builds (if needed) and runs `./build/simulation`.
+- To **build and run the tests**:  
   `make tests`  
-  This builds the `run_tests` executable and runs it. The executable is created in the project root.
+  Builds (if needed) and runs `./build/run_tests`.
 - To **remove** the built executables:  
   `make clean`
 
 **3 – Run the tests**  
-From the project root, run:
+From the project root you can run the tests with:
 
 ```bash
-./run_tests
+make tests
 ```
 
+Or, if you already ran `make all`, run the test executable directly:
+
+```bash
+./build/run_tests
+```
 
 To inspect test output, go to the **simulation_results** folder and open the generated files (e.g. per-model `*_results.txt` and the full log).
 
 **4 – Run the top model (simulation)**  
-From the project root, run:
+From the project root you can run the simulation with:
 
 ```bash
-./simulation
+make simulation
+```
+
+Or, if you already ran `make all`, run the simulation executable directly:
+
+```bash
+./build/simulation
 ```
 
 The simulation reads the start trigger from **input_data/coupled_models/start.txt**. Output is written to **simulation_results/** (e.g. simulation_output.txt and per-model `*_results.txt`).
