@@ -4,16 +4,24 @@
   "linkFromPortIdProperty": "fromPort",
   "linkToPortIdProperty": "toPort",
   "nodeDataArray": [
-{"text":"visible","figure":"Ellipse","size":"96 96","fill":"white","key":-1,"loc":"-360 -60","group":-4},
-{"text":"disappeared","figure":"Ellipse","size":"104 98","fill":"white","key":-2,"loc":"-108 -61","group":-4},
-{"text":"appearing","figure":"Ellipse","size":"101 95","fill":"white","key":-3,"loc":"138 -60","group":-4},
+{"text":"visible","figure":"Ellipse","size":"96 96","fill":"white","key":-1,"loc":"-712 -69.5","group":-4},
+{"text":"disappearing","figure":"Ellipse","size":"112 101","fill":"white","key":-2,"loc":"-522 -69.5","group":-4},
+{"text":"absent_ack","figure":"Ellipse","size":"101 95","fill":"white","key":-3,"loc":"-122 -69.5","group":-4},
 {"text":"NucleolusModel","isGroup":true,"color":"black","I":[],"O":[],"key":-4},
-{"text":"input_phase","figure":"Rectangle","size":"90 65","fill":"orange","key":-5,"loc":"-610 -50"},
-{"text":"status_out","figure":"Square","size":"62 65","fill":"pink","key":-6,"loc":"380 -50"}
+{"text":"phase_in","figure":"Rectangle","size":"90 65","fill":"orange","key":-5,"loc":"-920 -60"},
+{"text":"status_out","figure":"Square","size":"62 65","fill":"pink","key":-6,"loc":"470 -50"},
+{"text":"absent_ack","figure":"Ellipse","size":"100 88","fill":"white","key":-7,"loc":"-322 -69.5","group":-4},
+{"text":"reappearing","figure":"Ellipse","size":"102 87","fill":"white","key":-8,"loc":"73.5 -69.5","group":-4},
+{"text":"reappearing","figure":"Ellipse","size":"102 87","fill":"white","key":-9,"loc":"133.5 -59.5"},
+{"text":"reappearing","figure":"Ellipse","size":"102 89","fill":"white","key":-10,"loc":"280 -70","group":-4}
 ],
   "linkDataArray": [
-{"points":[199.06256103515625,-49.74689661179946,209.06256103515625,-49.74689661179946,274.0312805175781,-49.74689661179946,274.0312805175781,-50,339,-50,349,-50],"color":"black","to":-6,"toPort":"L","label":""},
-{"points":[-312,-60,-302,-60,-236,-60,-236,-61,-170,-61,-160,-61],"color":"black","from":-1,"to":-2,"fromPort":"R","toPort":"L","label":"input_phase"},
-{"points":[-56,-61,-46,-61,15.75,-61,15.75,-60,77.5,-60,87.5,-60],"color":"black","from":-2,"to":-3,"fromPort":"R","toPort":"L","label":"input_phase"},
-{"points":[-565,-50,-555,-50,-513.4165459278868,-50,-513.4165459278868,-50.26266080856726,-471.83309185577355,-50.26266080856726,-461.83309185577355,-50.26266080856726],"color":"black","from":-5,"fromPort":"R","label":""}
+{"points":[199.06256103515625,-49.74689661179946,209.06256103515625,-49.74689661179946,249.740325578524,-49.74689661179946,249.740325578524,-49.80002099105168,290.41809012189174,-49.80002099105168,300.41809012189174,-49.80002099105168],"color":"black","toPort":"","label":""},
+{"points":[-664,-69.5,-654,-69.5,-621,-69.5,-621,-69.5,-588,-69.5,-578,-69.5],"color":"black","from":-1,"to":-2,"fromPort":"R","toPort":"L","label":"phase_in"},
+{"points":[-272,-69.5,-262,-69.5,-222.25,-69.5,-222.25,-69.5,-182.5,-69.5,-172.5,-69.5],"color":"black","from":-7,"to":-3,"fromPort":"R","toPort":"L","label":"phase_in"},
+{"from":-2,"to":-7,"fromPort":"R","toPort":"L","points":[-466,-69.5,-456,-69.5,-419,-69.5,-419,-69.5,-382,-69.5,-372,-69.5],"label":"phase_in"},
+{"from":-3,"to":-8,"fromPort":"R","toPort":"L","points":[-71.5,-69.5,-61.5,-69.5,-24.5,-69.5,-24.5,-69.5,12.5,-69.5,22.5,-69.5],"label":"phase_in"},
+{"points":[124.5,-69.5,134.5,-69.5,177.75881762217043,-69.5,177.75881762217043,-70,219,-70,229,-70],"color":"black","from":-8,"to":-10,"fromPort":"R","toPort":"L","label":"phase_in"},
+{"points":[382.5047916472753,-49.80016004064687,392.5047916472753,-49.80016004064687,410.75239582363764,-49.80016004064687,410.75239582363764,-51.5,429,-51.5,439,-51.5],"color":"black","to":-6,"label":""},
+{"points":[-875,-60,-865,-60,-842.7978536072044,-60,-842.7978536072044,-60.39296844409847,-820.5957072144088,-60.39296844409847,-810.5957072144088,-60.39296844409847],"color":"black","from":-5,"fromPort":"R","label":""}
 ]}

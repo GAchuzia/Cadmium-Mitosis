@@ -80,13 +80,13 @@ public:
                 return 3.0;  // t2
             
             if (state.state == "pulling")
-                return 3.0;  // t3
+                return 3.0;  // t2
             
             if (state.state == "disassembling")
-                return 3.0;  // t4
+                return 3.0;  // t2
 
             if (state.state == "inactive")
-                return 3.0;  // t5
+                return 3.0;  // t2
         }
         return std::numeric_limits<double>::infinity();
     }

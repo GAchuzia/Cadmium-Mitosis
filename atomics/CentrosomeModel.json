@@ -3,21 +3,23 @@
   "copiesArrayObjects": true,
   "linkFromPortIdProperty": "fromPort",
   "linkToPortIdProperty": "toPort",
-  "modelData": {"position":"-1541.0557562240692 -295.61873914196946"},
   "nodeDataArray": [
-{"text":"duplicated","figure":"Ellipse","size":"96 83","fill":"white","key":-1,"loc":"-48.5 -49","group":-7},
-{"text":"migrating","figure":"Ellipse","size":"85 85","fill":"white","key":-2,"loc":"680 -50","group":-7},
-{"text":"at_poles","figure":"Ellipse","size":"85 85","fill":"white","key":-3,"loc":"420 -50","group":-7},
-{"text":"stable","figure":"Ellipse","size":"85 85","fill":"white","key":-5,"loc":"41720 39910","group":-7},
-{"text":"status_out","figure":"Square","size":"62 65","fill":"pink","key":-8,"loc":"580 -50"},
+{"text":"stable","figure":"Ellipse","size":"85 85","fill":"white","key":-1,"loc":"-300 -150","group":-7},
+{"text":"duplicated","figure":"Ellipse","size":"91 84","fill":"white","key":-2,"loc":"-87 -149.5","group":-7},
+{"text":"duplicated","figure":"Ellipse","size":"91 86","fill":"white","key":-3,"loc":"113 -150.5","group":-7},
+{"text":"migrating","figure":"Ellipse","size":"85 85","fill":"white","key":-4,"loc":"300 -150","group":-7},
+{"text":"at_poles","figure":"Ellipse","size":"91 85","fill":"white","key":-5,"loc":"503 -150","group":-7},
+{"text":"at_poles","figure":"Ellipse","size":"85 85","fill":"white","key":-6,"loc":"700 -150","group":-7},
 {"text":"CentrosomeModel","isGroup":true,"color":"black","I":[],"O":[],"key":-7},
-{"text":"input_phase","figure":"Rectangle","size":"90 65","fill":"orange","key":-9,"loc":"-530 -50"}
+{"text":"phase_in","figure":"Rectangle","size":"90 65","fill":"orange","key":-8,"loc":"-550 -140"},
+{"text":"status_out","figure":"Square","size":"62 65","fill":"pink","key":-9,"loc":"910 -130"}
 ],
   "linkDataArray": [
-{"points":[448.67071242559655,-50.45278517799997,458.67071242559655,-50.45278517799997,498.8353562127983,-50.45278517799997,498.8353562127983,-50,539,-50,549,-50],"color":"black","to":-8,"toPort":"L"},
-{"points":[420,-7.5,420,2.5,420,24.258209466456407,-277.18799999999464,24.258209466456407,-277.18799999999464,1.5080000000016298,-277.18799999999464,-8.49199999999837],"color":"black","from":-3,"to":-5,"toPort":"B","fromPort":"B","label":"input_phase"},
-{"points":[-234.68799999999464,-50.99199999999837,-224.68799999999464,-50.99199999999837,-165.59399999999732,-50.99199999999837,-165.59399999999732,-49,-106.5,-49,-96.5,-49],"color":"black","from":-5,"to":-1,"fromPort":"R","toPort":"L","label":"input_phase"},
-{"points":[-0.5,-49,9.5,-49,78.5,-49,78.5,-50,147.5,-50,157.5,-50],"color":"black","from":-1,"to":-2,"fromPort":"R","toPort":"L","label":"input_phase"},
-{"points":[242.5,-50,252.5,-50,310,-50,310,-50,367.5,-50,377.5,-50],"color":"black","from":-2,"to":-3,"fromPort":"R","toPort":"L","label":"input_phase"},
-{"points":[-485,-50,-475,-50,-427.13312051631146,-50,-427.13312051631146,-50.118207767103804,-379.6879386675303,-50.118207767103804,-369.6879386675303,-50.118207767103804],"color":"black","from":-9,"fromPort":"R","label":""}
+{"from":-1,"to":-2,"fromPort":"R","toPort":"L","points":[-257.5,-150,-247.5,-150,-195,-150,-195,-149.5,-142.5,-149.5,-132.5,-149.5],"label":"phase_in"},
+{"from":-2,"to":-3,"fromPort":"R","toPort":"L","points":[-41.5,-149.5,-31.5,-149.5,13,-149.5,13,-150.5,57.5,-150.5,67.5,-150.5],"label":"phase_in"},
+{"from":-3,"to":-4,"fromPort":"","toPort":"L","points":[158.5,-150.5,168.5,-150.5,208,-150.5,208,-150,247.5,-150,257.5,-150],"label":"phase_in"},
+{"from":-4,"to":-5,"fromPort":"","toPort":"L","points":[342.5,-150,352.5,-150,400,-150,400,-150,447.5,-150,457.5,-150],"label":"phase_in"},
+{"from":-5,"to":-6,"fromPort":"R","toPort":"L","points":[548.5,-150,558.5,-150,603,-150,603,-150,647.5,-150,657.5,-150],"label":"phase_in"},
+{"points":[-505,-140,-495,-140,-451.00469461956357,-140,-451.00469461956357,-138.83332443237305,-407.00938923912713,-138.83332443237305,-397.00938923912713,-138.83332443237305],"color":"black","from":-8,"fromPort":"R","label":""},
+{"points":[796.7053821222996,-129.3874218536639,806.7053821222996,-129.3874218536639,837.7840194620394,-129.3874218536639,837.7840194620394,-130,869,-130,879,-130],"color":"black","to":-9,"toPort":"L","label":""}
 ]}

@@ -66,6 +66,7 @@ public:
         }
     }
 
+    // Time Advance
     double timeAdvance(const ChromosomeState& state) const override {
         if (state.active) {
             if (state.state == "condensing")   return 1.0; 

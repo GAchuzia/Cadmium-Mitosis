@@ -42,7 +42,6 @@ public:
                 state.state = "disassembling";
                 state.active = true;
             } else if (msg == "Metaphase" || msg == "Anaphase") {
-                // Temporary state to acknowledge the phase and trigger output
                 state.state = "absent_ack"; 
                 state.active = true;
             } else if (msg == "Telophase" || msg == "Cytokinesis") {

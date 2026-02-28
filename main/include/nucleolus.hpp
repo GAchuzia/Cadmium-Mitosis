@@ -72,9 +72,9 @@ public:
     // Time Advance
     double timeAdvance(const NucleolusState& state) const override {
         if (state.active) {
-            if (state.state == "disappearing") return 2.0;  
-            if (state.state == "absent_ack")   return 0.1;  // Fast acknowledgment 
-            if (state.state == "reappearing")  return 3.0;  
+            if (state.state == "disappearing") return 2.0;  // t1
+            if (state.state == "reappearing")  return 3.0;  // t2
+            if (state.state == "absent_ack")   return 0.1;  // t3 
         }
         return std::numeric_limits<double>::infinity();
     }
