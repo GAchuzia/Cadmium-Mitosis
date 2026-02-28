@@ -9,12 +9,6 @@ This folder contains the **Mitosis** DEVS model implemented in Cadmium.
 **Makefile**  
 Build and run targets: `make all` (build both executables), `make simulation`, `make tests`, `make clean`.
 
-**build_sim.sh**  
-Alternate script to compile the simulation only.
-
-**build/**  
-*Created automatically when you compile. Contains the executables `simulation` and `run_tests`.*
-
 ---
 
 **main/**  
