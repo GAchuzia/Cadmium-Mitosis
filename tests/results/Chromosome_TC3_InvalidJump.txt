@@ -1,0 +1,12 @@
+
+========== Chromosome_TC3_InvalidJump ==========
+time;model_id;model_name;port_name;data
+0;1;reader;;0
+0;2;model_under_test;;uncondensed
+0;1;reader;out;Anaphase
+0;1;reader;;inf
+0;2;model_under_test;;separating
+1;2;model_under_test;status_out;ready
+1;2;model_under_test;;separated
+1;1;reader;;inf
+1;2;model_under_test;;separated

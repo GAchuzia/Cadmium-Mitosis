@@ -1,0 +1,12 @@
+
+========== NuclearEnvelope_TC1_Prophase ==========
+time;model_id;model_name;port_name;data
+0;1;reader;;0
+0;2;model_under_test;;intact
+0;1;reader;out;Prophase
+0;1;reader;;inf
+0;2;model_under_test;;disassembling
+1;2;model_under_test;status_out;ready
+1;2;model_under_test;;absent
+1;1;reader;;inf
+1;2;model_under_test;;absent

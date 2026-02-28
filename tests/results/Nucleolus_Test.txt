@@ -1,0 +1,17 @@
+
+========== Nucleolus_Test ==========
+time;model_id;model_name;port_name;data
+0;1;reader;;0
+0;2;model_under_test;;visible
+0;1;reader;out;Prophase
+0;1;reader;;20
+0;2;model_under_test;;disappearing
+2;2;model_under_test;status_out;ready
+2;2;model_under_test;;disappeared
+20;1;reader;out;Telophase
+20;1;reader;;inf
+20;2;model_under_test;;reappearing
+23;2;model_under_test;status_out;ready
+23;2;model_under_test;;visible
+23;1;reader;;inf
+23;2;model_under_test;;visible

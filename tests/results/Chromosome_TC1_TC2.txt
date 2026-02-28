@@ -1,0 +1,27 @@
+
+========== Chromosome_TC1_TC2 ==========
+time;model_id;model_name;port_name;data
+0;1;reader;;0
+0;2;model_under_test;;uncondensed
+0;1;reader;out;Prophase
+0;1;reader;;10
+0;2;model_under_test;;condensing
+1;2;model_under_test;status_out;ready
+1;2;model_under_test;;condensed
+10;1;reader;out;Metaphase
+10;1;reader;;5
+10;2;model_under_test;;aligning
+11;2;model_under_test;status_out;ready
+11;2;model_under_test;;aligned
+15;1;reader;out;Anaphase
+15;1;reader;;5
+15;2;model_under_test;;separating
+16;2;model_under_test;status_out;ready
+16;2;model_under_test;;separated
+20;1;reader;out;Telophase
+20;1;reader;;inf
+20;2;model_under_test;;decondensing
+21;2;model_under_test;status_out;ready
+21;2;model_under_test;;uncondensed
+21;1;reader;;inf
+21;2;model_under_test;;uncondensed

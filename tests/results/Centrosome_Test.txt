@@ -1,0 +1,25 @@
+
+========== Centrosome_Test ==========
+time;model_id;model_name;port_name;data
+0;1;reader;;0
+0;2;model_under_test;;stable
+0;1;reader;out;Interphase
+0;1;reader;;5
+0;2;model_under_test;;stable
+5;1;reader;out;Prophase
+5;1;reader;;5
+5;2;model_under_test;;duplicated
+7;2;model_under_test;status_out;ready
+7;2;model_under_test;;duplicated
+10;1;reader;out;Metaphase
+10;1;reader;;5
+10;2;model_under_test;;migrating
+13;2;model_under_test;status_out;ready
+13;2;model_under_test;;migrating
+15;1;reader;out;Anaphase
+15;1;reader;;inf
+15;2;model_under_test;;at_poles
+15;2;model_under_test;status_out;ready
+15;2;model_under_test;;at_poles
+15;1;reader;;inf
+15;2;model_under_test;;at_poles
