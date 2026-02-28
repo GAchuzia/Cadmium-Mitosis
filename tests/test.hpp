@@ -3,6 +3,7 @@
 
 #include <limits> 
 #include <string>
+#include <fstream>
 #include <cadmium/modeling/devs/coupled.hpp>
 #include <cadmium/lib/iestream.hpp>
 #include <cadmium/simulation/root_coordinator.hpp>
@@ -23,6 +24,22 @@
 #include "../main/include/cell_structures.hpp"
 
 using namespace cadmium;
+
+// Writes to both file and stdout
+struct TeeBuf : std::streambuf {
+    std::streambuf* a;
+    std::streambuf* b;
+    TeeBuf(std::streambuf* a_, std::streambuf* b_) : a(a_), b(b_) {}
+    int overflow(int c) override {
+        if (c == EOF) return !EOF;
+        a->sputc(static_cast<char>(c));
+        b->sputc(static_cast<char>(c));
+        return c;
+    }
+    int sync() override {
+        return (a->pubsync() == 0 && b->pubsync() == 0) ? 0 : -1;
+    }
+};
 
 // A generic Wrapper to connect any Atomic Model to an Input Stream
 template<typename ModelType>
@@ -50,6 +67,10 @@ struct PhaseControllerTester : public Coupled {
 // Function to handle the simulation boilerplate
 template<typename ModelType>
 void run_test(std::string test_name, std::string file_path) {
+    std::streambuf* old_cout = std::cout.rdbuf();
+    std::ofstream out("tests/results/" + test_name + ".txt");
+    TeeBuf tee(out.rdbuf(), old_cout);
+    std::cout.rdbuf(&tee);
     std::cout << "\n========== " << test_name << " ==========\n";
     auto model = std::make_shared<AtomicTester<ModelType>>(test_name, file_path);
     auto rootCoordinator = RootCoordinator(model);
@@ -59,10 +80,15 @@ void run_test(std::string test_name, std::string file_path) {
     rootCoordinator.start();
     rootCoordinator.simulate(100.0);
     rootCoordinator.stop();
+    std::cout.rdbuf(old_cout);
 }
 
 template<typename ModelType>
 void run_phase_controller_test(std::string test_name, std::string file_path) {
+    std::streambuf* old_cout = std::cout.rdbuf();
+    std::ofstream out("tests/results/" + test_name + ".txt");
+    TeeBuf tee(out.rdbuf(), old_cout);
+    std::cout.rdbuf(&tee);
     std::cout << "\n========== " << test_name << " ==========\n";
     auto model = std::make_shared<PhaseControllerTester<ModelType>>(test_name, file_path);
     auto rootCoordinator = RootCoordinator(model);
@@ -71,6 +97,7 @@ void run_phase_controller_test(std::string test_name, std::string file_path) {
     rootCoordinator.start();
     rootCoordinator.simulate(100.0);
     rootCoordinator.stop();
+    std::cout.rdbuf(old_cout);
 }
 
 template<typename ModelType>
@@ -114,6 +141,10 @@ void run_phase_control_test(std::string test_name,
                             std::string cen_file,
                             std::string nucleo_file)
 {
+    std::streambuf* old_cout = std::cout.rdbuf();
+    std::ofstream out("tests/results/" + test_name + ".txt");
+    TeeBuf tee(out.rdbuf(), old_cout);
+    std::cout.rdbuf(&tee);
     std::cout << "\n========== " << test_name << " ==========\n";
 
     auto model = std::make_shared<PhaseControlTester<ModelType>>(
@@ -132,6 +163,7 @@ void run_phase_control_test(std::string test_name,
     rootCoordinator.start();
     rootCoordinator.simulate(100.0);
     rootCoordinator.stop();
+    std::cout.rdbuf(old_cout);
 }
 
 #endif

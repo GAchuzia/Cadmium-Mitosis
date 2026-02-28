@@ -37,6 +37,7 @@ simulation: $(SIMULATION)
 	./$(SIMULATION)
 
 tests: $(RUN_TESTS)
+	mkdir -p tests/results
 	./$(RUN_TESTS)
 
 clean:
